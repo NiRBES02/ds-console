@@ -1,3 +1,4 @@
+const Chalk = require('chalk');
 const Readline = require('readline');
 const rl = Readline.createInterface({
   input: process.stdin,
@@ -13,7 +14,7 @@ class Console {
       success: '#00ff00',
       warning: '#ffff00',
       danger: '#ff0000',
-      info: '#00d0fa'
+      info: '#87ceeb'
     }
   }
   
@@ -49,7 +50,6 @@ class Console {
       });
       lines.push(currentLine);
       console.log(lines.join('\n'));
-      //console.log(filter)
     } else {
       console.log(`${timestamp} ${coloredMessage}`);
     }
@@ -86,6 +86,33 @@ class Console {
       return false;
     }
   }
+  
+  parseArgsFromString(input) {
+    const parsed = {
+      flags: {},
+      values: {},
+      unknown: []
+    };
+    const args = input.split(' ') || input;
+    for (let i = 0; i < args.length; i++) {
+      const arg = args[i];
+      if (arg.startsWith('--')) {
+        const [key,
+          value] = arg.slice(2).split('=');
+        if (value !== undefined) {
+          parsed.values[key] = value;
+        } else {
+          parsed.flags[key] = true;
+        }
+      } else if (arg.startsWith('-')) {
+        const key = arg.slice(1);
+        parsed.flags[key] = true;
+      } else {
+        parsed.unknown.push(arg);
+      }
+    }
+    return parsed;
+  }
 
   clear() {
     Readline.cursorTo(process.stdout, 0, 0);
@@ -108,7 +135,7 @@ class Console {
   handler() {
     rl.question('', (input) => {
       const cmd = input.split(' ')[0];
-      const args = Core.parseArgsFromString(input);
+      const args = this.parseArgsFromString(input);
       if (this.commands.has(cmd)) {
         this.commands.get(cmd)(args);
       } else {
