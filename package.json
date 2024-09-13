@@ -1,0 +1,34 @@
+{
+  "name": "ds-console",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+	"repository": "NiRBES02/ds-console",
+  "keywords": [
+    "color",
+    "NiRBES",
+    "colors",
+    "console",
+    "terminal",
+    "logging",
+    "log",
+    "colorful logs",
+    "colored output",
+    "console output",
+    "debugging",
+    "CLI",
+    "command line",
+    "terminal utilities",
+    "stylish console",
+    "terminal logging",
+    "console colors",
+    "log formatting"],
+  "author": "NiRBES02",
+  "license": "ISC",
+  "description": "Make the output to the console more beautiful and brighter",
+  "dependencies": {
+    "chalk": "^4.1.2"
+  }
+}
