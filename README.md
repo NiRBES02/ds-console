@@ -42,18 +42,35 @@ Console.cmd('ping', () => {
 console => [00:44:32] pong
 ```
 
-### Команда с использованием аргументов
+### Команда с использованием арг-флагом
 ```js
 const Console = require('ds-console');
 
 Console.cmd('ping', (arg) => {
-  if (arg.value.view){
+  if (arg.flags.view){
     Console.log('pong');
   }
 });
 ```
 ```
 > ping --view
+console => [00:44:32] pong
+> ping
+console => 
+```
+
+### Команда с использованием арг-значением
+```js
+const Console = require('ds-console');
+
+Console.cmd('ping', (arg) => {
+  if (arg.values.view == 'yes'){
+    Console.log('pong');
+  }
+});
+```
+```
+> ping --view=yes
 console => [00:44:32] pong
 > ping
 console => 
