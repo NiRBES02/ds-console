@@ -30,7 +30,6 @@
   "license": "ISC",
   "description": "Make the output to the console more beautiful and brighter",
   "dependencies": {
-    "chalk": "^4.1.2",
-    "ds-console": "^1.0.0"
+    "chalk": "^4.1.2"
   }
 }
