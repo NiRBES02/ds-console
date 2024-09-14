@@ -3,6 +3,9 @@
 
 [![npm version](https://badge.fury.io/js/ds-console.svg)](https://www.npmjs.com/package/ds-console)
 
+[![GitHub issues](https://img.shields.io/github/issues/NiRBES02/ds-console.svg)](https://github.com/NiRBES02/ds-console/issues)
+[![GitHub stars](https://img.shields.io/github/stars/NiRBES02/ds-console.svg)](https://github.com/NiRBES02/ds-console/stargazers)
+
 Возможности доступные Вам:
 - Создание собственных команд для Вашего приложения.
 - Логирование с использованием цветового обозначения (успешно, внимание, ошибка, информация).
