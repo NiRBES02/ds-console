@@ -151,5 +151,9 @@ const new_console = new Console();
 new_console.handler()
 
 new_console.cmd('clear', (cmd) => new_console.clear());
+new_console.cmd('stop', (cmd) => {
+  new_console.log('Закрытие приложения...');
+  setInterval(() => process.exit(0), 1000);
+});
 
 module.exports = new_console;
