@@ -4,7 +4,7 @@
 [![npm version](https://badge.fury.io/js/ds-console.svg)](https://www.npmjs.com/package/ds-console)
 [![GitHub issues](https://img.shields.io/github/issues/NiRBES02/ds-console.svg)](https://github.com/NiRBES02/ds-console/issues)
 [![GitHub stars](https://img.shields.io/github/stars/NiRBES02/ds-console.svg)](https://github.com/NiRBES02/ds-console/stargazers)
-[![Discord](https://img.shields.io/discord/1256963552657543201.svg?label=Join%20Discord&logo=discord)](https://discord.gg/3QKtvHkSMK)
+[![Discord](https://img.shields.io/discord/1268172383286722591.svg?label=Join%20Discord&logo=discord)](https://discord.gg/3QKtvHkSMK)
 
 Возможности доступные Вам:
 - Создание собственных команд для Вашего приложения.
