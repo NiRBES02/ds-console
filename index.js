@@ -11,10 +11,13 @@ class Console {
   constructor() {
     this.commands = new Map();
     this.colors = {
-      success: '#00ff00',
-      warning: '#ffff00',
-      danger: '#ff0000',
-      info: '#87ceeb'
+      success: '#75b798',
+      warning: '#ffda6a',
+      danger: '#ea868f',
+      info: '#6edff6',
+      primary: '#6ea8fe',
+      secondary: '#a7acb1',
+
     }
   }
   
