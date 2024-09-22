@@ -1,3 +1,4 @@
+const chalk = require('chalk');
 const Chalk = require('chalk');
 const Readline = require('readline');
 const rl = Readline.createInterface({
@@ -160,3 +161,7 @@ new_console.cmd('stop', (cmd) => {
 });
 
 module.exports = new_console;
+
+module.exports.chalk = Chalk;
+
+
