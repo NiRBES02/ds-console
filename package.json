@@ -1,11 +1,17 @@
 {
   "name": "ds-console",
-  "version": "1.0.1",
+  "version": "1.0.3",
   "main": "index.js",
   "scripts": {
-    "test": "node test/index"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": "NiRBES02/ds-console",
+  "files": [
+    "index.js",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ],
   "keywords": [
     "color",
     "NiRBES",

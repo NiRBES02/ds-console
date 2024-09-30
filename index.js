@@ -14,7 +14,10 @@ class Console {
       success: '#00ff00',
       warning: '#ffff00',
       danger: '#ff0000',
-      info: '#87ceeb'
+      info: '#00ffff',
+      primary: '#0077ff',
+      secondary: '#666666',
+      magenta: '#ff66ee' 
     }
   }
   
@@ -114,10 +117,12 @@ class Console {
     return parsed;
   }
 
-  clear() {
+  clear(bool = true) {
     Readline.cursorTo(process.stdout, 0, 0);
     Readline.clearScreenDown(process.stdout);
+    if (bool) {
     this.log('Консоль очищена');
+    }
   }
 
   cmd(name, callback) {
@@ -148,12 +153,14 @@ class Console {
 
 const new_console = new Console();
 
-new_console.handler()
+new_console.handler();
+new_console.clear(false);
 
-new_console.cmd('clear', (cmd) => new_console.clear());
+new_console.cmd('clear', () => new_console.clear());
 new_console.cmd('stop', (cmd) => {
   new_console.log('Закрытие приложения...');
-  setInterval(() => process.exit(0), 1000);
+  setInterval(() => process.exit(0), 100);
 });
 
 module.exports = new_console;
+module.exports.chalk = Chalk;
