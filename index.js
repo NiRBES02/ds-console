@@ -17,10 +17,10 @@ class Console {
       info: '#00ffff',
       primary: '#0077ff',
       secondary: '#666666',
-      magenta: '#ff66ee' 
+      magenta: '#ff66ee'
     }
   }
-  
+
   log(...args) {
     const color = this.#getColor(args);
     const exclude = this.#getColorName(args);
@@ -44,12 +44,15 @@ class Console {
       let currentLine = timestamp;
       const lines = [];
       words.forEach((word) => {
-        if (currentLine.length + word.length + 1 <= consoleWidth) {
-          currentLine += ` ${word}`;
-        } else {
-          lines.push(currentLine);
-          currentLine = `${' '.repeat(timestampLength)}${word}`;
-        }
+        const splitWords = word.split('\n');
+        splitWords.forEach((splitWord, index) => {
+          if (currentLine.length + splitWord.length + 1 <= consoleWidth) {
+            currentLine += ` ${splitWord}`;
+          } else {
+            lines.push(currentLine);
+            currentLine = `${' '.repeat(timestampLength)}${splitWord}`;
+          }
+        });
       });
       lines.push(currentLine);
       console.log(lines.join('\n'));
@@ -67,7 +70,7 @@ class Console {
     }
     return null;
   }
-  
+
   #getColorName(args) {
     const array = args;
     const matchedKeys = Object.keys(this.colors).filter(key => array.includes(key));
@@ -89,7 +92,7 @@ class Console {
       return false;
     }
   }
-  
+
   parseArgsFromString(input) {
     const parsed = {
       flags: {},
@@ -121,7 +124,7 @@ class Console {
     Readline.cursorTo(process.stdout, 0, 0);
     Readline.clearScreenDown(process.stdout);
     if (bool) {
-    this.log('Консоль очищена');
+      this.log('Консоль очищена');
     }
   }
 
@@ -136,7 +139,7 @@ class Console {
     });
     return commands;
   }
-  
+
   handler() {
     rl.question('', (input) => {
       const cmd = input.split(' ')[0];
