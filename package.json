@@ -1,6 +1,6 @@
 {
   "name": "ds-console",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -36,6 +36,7 @@
   "license": "ISC",
   "description": "Make the output to the console more beautiful and brighter",
   "dependencies": {
-    "chalk": "^4.1.2"
+    "chalk": "^4.1.2",
+    "wrap-ansi": "^9.0.0"
   }
 }

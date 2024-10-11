@@ -6,7 +6,6 @@ const rl = Readline.createInterface({
   terminal: true
 });
 
-
 class Console {
   constructor() {
     this.commands = new Map();
@@ -21,7 +20,8 @@ class Console {
     }
   }
 
-  log(...args) {
+  async log(...args) {
+    const wrapAnsi = await import('wrap-ansi').then(m => m.default);
     const color = this.#getColor(args);
     const exclude = this.#getColorName(args);
     const filter = args.filter(arg => arg !== exclude);
@@ -30,35 +30,19 @@ class Console {
     const arr = [];
     filter.forEach((arg) => {
       if (this.#isObject(arg)) {
-        arr.push(JSON.stringify(arg));
+        arr.push('\n' + JSON.stringify(arg) + '\n');
       } else {
         arr.push(arg);
       }
     });
     const message = arr.join(' ');
-    const coloredMessage = color ? color(message): message;
+    const coloredMessage = color ? color(message) : message;
     const consoleWidth = process.stdout.columns || 80;
-    const timestampLength = timestamp.length / 2 + 1;
-    if (timestampLength + coloredMessage.length > consoleWidth) {
-      const words = coloredMessage.split(' ');
-      let currentLine = timestamp;
-      const lines = [];
-      words.forEach((word) => {
-        const splitWords = word.split('\n');
-        splitWords.forEach((splitWord, index) => {
-          if (currentLine.length + splitWord.length + 1 <= consoleWidth) {
-            currentLine += ` ${splitWord}`;
-          } else {
-            lines.push(currentLine);
-            currentLine = `${' '.repeat(timestampLength)}${splitWord}`;
-          }
-        });
-      });
-      lines.push(currentLine);
-      console.log(lines.join('\n'));
-    } else {
-      console.log(`${timestamp} ${coloredMessage}`);
-    }
+    const wrappedMessage = wrapAnsi(coloredMessage, consoleWidth - timestamp.length, { hard: true })
+      .split('\n')
+      .map((line, index) => index === 0 ? `${timestamp} ${line}` : `${' '.repeat(timestamp.length / 2)} ${line}`)
+      .join('\n');
+    console.log(wrappedMessage);
   }
 
   #getColor(args) {
@@ -75,22 +59,13 @@ class Console {
     const array = args;
     const matchedKeys = Object.keys(this.colors).filter(key => array.includes(key));
     if (matchedKeys.length > 0) {
-      return matchedKeys.join()
+      return matchedKeys.join();
     }
     return null;
   }
 
   #isObject(obj) {
     return typeof obj === 'object' && obj !== null;
-  }
-
-  #isJson(variable) {
-    try {
-      JSON.parse(variable);
-      return true;
-    } catch {
-      return false;
-    }
   }
 
   parseArgsFromString(input) {
@@ -103,8 +78,7 @@ class Console {
     for (let i = 0; i < args.length; i++) {
       const arg = args[i];
       if (arg.startsWith('--')) {
-        const [key,
-          value] = arg.slice(2).split('=');
+        const [key, value] = arg.slice(2).split('=');
         if (value !== undefined) {
           parsed.values[key] = value;
         } else {
