@@ -81,6 +81,36 @@ console => [00:44:32] pong
 console => 
 ```
 
+### Вы так же можете добавить описание своей команде (для команды help)
+```js
+const Console = require('ds-console');
+
+Console.cmd('ping', {
+  description: 'pong'
+}, () => {
+  Console.log('pong');
+});
+```
+или
+```js
+const Console = require('ds-console');
+
+Console.cmd('ping', 'Это описание', () => {
+  Console.log('pong');
+});
+```
+> [!CAUTION]
+> Обработчик команд определяет название команды по введенному аргументу, т.е. если внесете в описание всего 1 слово, то последний внесенный аргумент будет считаться названием
+
+Неправельная команда ping
+```js
+const Console = require('ds-console');
+
+Console.cmd('ping', 'pong', () => {
+  Console.log('pong');
+});
+```
+
 ## Дополнительно
 Вы также можете вызвать Chalk напрямую из нашей библиотеки:
 ```js

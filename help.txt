@@ -1,0 +1,3 @@
+{info.name} {cmd.name}
+{info.description} {cmd.description}
+{info.unknown}
